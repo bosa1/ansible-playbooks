@@ -1,0 +1,7 @@
+---
+
+- name: Check if OS is up to date
+  args:
+    executable: /bin/bash
+  shell: |
+    yum check-update
