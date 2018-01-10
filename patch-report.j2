@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>Patch Status</title>
+  </head>
+  <body>
+    <h1>Patch Status</h1>
+    <table class="sortable">
+      <thead>
+        <tr>
+          <th>Host</th>
+          <th>OS Distribution</th>
+          <th>OS Release</th>
+          <th>Architecture</th>
+          <th>Available Updates</th>
+          <th>Security Updates</th>
+        </tr>
+      </thead>
+      <tbody>
+{% for i in play_hosts | sort %} 
+         <tr>
+           <td>{{ hostvars[i]['ansible_fqdn'] }}</td>
+           <td>{{ hostvars[i]['ansible_distribution'] }}</td>
+           <td>{{ hostvars[i]['ansible_distribution_version'] }}</td>
+           <td>{{ hostvars[i]['ansible_architecture'] }}</td>
+           <td>{{ hostvars[i]['update_status']['stdout'] }}</td>
+           <td>{{ hostvars[i]['security_status']['stdout'] }}</td>
+         </tr>
+{% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

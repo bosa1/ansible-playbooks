@@ -1,0 +1,16 @@
+- name: Generate patch status report
+  hosts: all
+  tasks:
+    - name: Check general patch status
+      script: patch-status.sh {{ ansible_os_family }}
+      register: update_status
+
+    - name: Check security patch status
+      script: patch-status.sh {{ ansible_os_family }} security
+      register: security_status
+
+    - name: Generate patch status report
+      template: src=patch-report.j2 dest=/tmp/linux_report.html
+      delegate_to: localhost
+      run_once: true
+
