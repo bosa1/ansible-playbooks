@@ -10,7 +10,6 @@
       register: security_status
 
     - name: Generate patch status report
-      template: src=patch-report.j2 dest=/tmp/linux_report.html
-      delegate_to: localhost
+      template: src=patch-report.j2 dest={{ report_dest }}
+      delegate_to: {{ report_host }}
       run_once: true
-
