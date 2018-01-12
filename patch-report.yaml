@@ -9,3 +9,8 @@
       template: src=patch-report.j2 dest="{{ report_dest }}"
       delegate_to: "{{ report_host }}"
       run_once: true
+
+    - debug:
+        msg: "<a href=\"{{ report_url }}\">Report Available Here</a>"
+      when: report_url is defined
+      run_once: true
