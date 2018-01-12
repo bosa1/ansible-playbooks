@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
  <head>
-  <link rel="stylesheet" href="css/jquery.dataTables.min.css" type="text/css" />
+  <link rel="stylesheet" href="css/jquery-dataTables.css" type="text/css" />
   <script src="js/jquery-1.12.4.js" type="text/javascript" language="javascript"></script>
-  <script src="js/jquery.dataTables.min.js" type="text/javascript" language="javascript"></script>
+  <script src="js/jquery-dataTables.js" type="text/javascript" language="javascript"></script>
   <script type="text/javascript" class="init">
    $(document).ready(function() {
     $('#status').DataTable();
@@ -17,14 +17,24 @@
   <table id="status" class="display" cellspacing="0" width="100%">
    <thead>
     <tr>
-     <th>Host</th>
-     <th>OS Distribution</th>
-     <th>OS Release</th>
-     <th>Architecture</th>
-     <th>Available Updates</th>
-     <th>Security Updates</th>
+     <th class="dt-left">Host</th>
+     <th class="dt-left">OS Distribution</th>
+     <th class="dt-left">OS Release</th>
+     <th class="dt-left">Architecture</th>
+     <th class="dt-left">Available Updates</th>
+     <th class="dt-left">Security Updates</th>
     </tr>
    </thead>
+   <tfoot>
+    <tr>
+     <th class="dt-left">Host</th>
+     <th class="dt-left">OS Distribution</th>
+     <th class="dt-left">OS Release</th>
+     <th class="dt-left">Architecture</th>
+     <th class="dt-left">Available Updates</th>
+     <th class="dt-left">Security Updates</th>
+    </tr>
+   </tfoot>
    <tbody>
 {% for i in play_hosts | sort %} 
     <tr>
