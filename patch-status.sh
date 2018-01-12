@@ -3,11 +3,16 @@ export PATH=/usr/bin:/bin:/usr/sbin:/sbin
 
 case "$1" in
   RedHat)
-    yum -q ${2:+--security} check-update | grep -v '^$' | wc -l ;;
+    yum -q check-update | grep -v '^$' | wc -l
+    yum -q --security check-update | grep -v '^$' | wc -l ;;
   Suse)
-    zypper -q list-patches ${2:+-g security}| wc -l ;;
+    zypper -q list-patches | wc -l
+    zypper -q list-patches -g security | wc -l ;;
   Debian)
-    apt-get upgrade -s | grep -i "^inst .*/.*${2:+-security} " | wc -l ;;
+    apt-get upgrade -s | grep -i "^inst " | wc -l
+    apt-get upgrade -s | grep -i "^inst .*/.*-security " | wc -l ;;
   *)
-    echo "OS family $1 not supported" ;;
+    # Unknown OS family
+    echo "0000"
+    echo "0000" ;;
 esac

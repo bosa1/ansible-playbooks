@@ -1,32 +1,54 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Patch Status</title>
-  </head>
-  <body>
-    <h1>Patch Status</h1>
-    <table class="sortable">
-      <thead>
-        <tr>
-          <th>Host</th>
-          <th>OS Distribution</th>
-          <th>OS Release</th>
-          <th>Architecture</th>
-          <th>Available Updates</th>
-          <th>Security Updates</th>
-        </tr>
-      </thead>
-      <tbody>
+ <head>
+  <link rel="stylesheet" href="css/jquery.dataTables.min.css" type="text/css" />
+  <script src="js/jquery-1.12.4.js" type="text/javascript" language="javascript"></script>
+  <script src="js/jquery.dataTables.min.js" type="text/javascript" language="javascript"></script>
+  <script type="text/javascript" class="init">
+   $(document).ready(function() {
+    $('#example').DataTable();
+   } );
+  </script>
+  <title>{{ doc_title }}</title>
+ </head>
+ <body>
+  <h1>{{ doc_title }}</h1>
+  <p>Generated: {{ ansible_date_time['iso8601'] }}</p>
+  <table class="sortable">
+   <thead>
+    <tr>
+     <th>Host</th>
+     <th>OS Distribution</th>
+     <th>OS Release</th>
+     <th>Architecture</th>
+     <th>Available Updates</th>
+     <th>Security Updates</th>
+    </tr>
+   </thead>
+   <tbody>
 {% for i in play_hosts | sort %} 
-         <tr>
-           <td>{{ hostvars[i]['ansible_fqdn'] }}</td>
-           <td>{{ hostvars[i]['ansible_distribution'] }}</td>
-           <td>{{ hostvars[i]['ansible_distribution_version'] }}</td>
-           <td>{{ hostvars[i]['ansible_architecture'] }}</td>
-           <td>{{ hostvars[i]['update_status']['stdout'] }}</td>
-           <td>{{ hostvars[i]['security_status']['stdout'] }}</td>
-         </tr>
+    <tr>
+     <td data-search="{{ hostvars[i]['ansible_fqdn'] }}">
+      {{ hostvars[i]['ansible_fqdn'] }}
+     </td>
+     <td data-search="{{ hostvars[i]['ansible_distribution'] }}">
+      {{ hostvars[i]['ansible_distribution'] }}
+     </td>
+     <td data-search="{{ hostvars[i]['ansible_distribution_version'] }}">
+      {{ hostvars[i]['ansible_distribution_version'] }}
+     </td>
+     <td data-search="{{ hostvars[i]['ansible_distribution_architecture'] }}">
+      {{ hostvars[i]['ansible_architecture'] }}
+     </td>
+     <td data-order="{{ hostvars[i]['patch_status']['stdout_lines'][0] }}">
+      {{ hostvars[i]['patch_status']['stdout_lines'][0] }}
+     </td>
+     <td data-order="{{ hostvars[i]['patch_status']['stdout_lines'][1] }}">
+      {{ hostvars[i]['patch_status']['stdout_lines'][1] }}
+     </td>
+    </tr>
 {% endfor %}
-      </tbody>
-    </table>
-  </body>
+   </tbody>
+  </table>
+ </body>
 </html>
