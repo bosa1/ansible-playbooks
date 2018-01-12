@@ -11,6 +11,6 @@
       run_once: true
 
     - debug:
-        msg: "<a href=\"{{ report_url }}\">Report Available Here</a>"
+        msg: "Report is available at: {{ report_url }}"
       when: report_url is defined
       run_once: true
